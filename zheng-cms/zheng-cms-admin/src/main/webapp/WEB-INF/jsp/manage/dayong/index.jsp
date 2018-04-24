@@ -105,7 +105,7 @@ var createDialog;
 function createAction() {
 	createDialog = $.dialog({
 		animationSpeed: 300,
-		title: '新增文章',
+		title: '新增景点',
 		columnClass: 'xlarge',
 		content: 'url:${basePath}/manage/spot/add',
 		// content: 'url:http://www.baidu.com',

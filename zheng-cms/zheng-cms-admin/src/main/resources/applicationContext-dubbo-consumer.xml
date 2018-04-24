@@ -32,6 +32,8 @@
     <dubbo:reference id="cmsSettingService" interface="com.zheng.cms.rpc.api.CmsSettingService" mock="true"/>
     <!-- 系统 -->
     <dubbo:reference id="cmsSystemService" interface="com.zheng.cms.rpc.api.CmsSystemService" mock="true"/>
+    <!-- 景点 -->
+    <dubbo:reference id="cmsDayongService" interface="com.zheng.cms.rpc.api.CmsDayongService" mock="true"/>
 
     <!-- 接口服务 -->
     <dubbo:reference id="upmsApiService" interface="com.zheng.upms.rpc.api.UpmsApiService" mock="true"/>

@@ -51,4 +51,8 @@
     <bean id="cmsSystemImpl" class="com.zheng.cms.rpc.service.impl.CmsSystemServiceImpl"/>
     <dubbo:service interface="com.zheng.cms.rpc.api.CmsSystemService" ref="cmsSystemImpl" timeout="10000"/>
 
+    <!-- 景点 -->
+    <bean id="cmsDayongServiceImpl" class="com.zheng.cms.rpc.service.impl.CmsDayongServiceImpl" />
+    <dubbo:service interface="com.zheng.cms.rpc.api.CmsDayongService" ref="cmsDayongServiceImpl" timeout="10000" />
+
 </beans>
