@@ -3,10 +3,12 @@ package com.zheng.cms.admin.controller.manage;
 import com.zheng.cms.common.constant.CmsResult;
 import com.zheng.cms.common.constant.CmsResultConstant;
 import com.zheng.cms.dao.model.CmsDayong;
+import com.zheng.cms.dao.model.CmsDayongExample;
 import com.zheng.cms.rpc.api.CmsDayongService;
 import com.zheng.common.base.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +17,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -42,8 +48,30 @@ public class CmsDayongController extends BaseController {
     @ApiOperation(value = "景点管理主页")
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String sayHello() {
-        System.out.println("hello 123456");
         return "/manage/dayong/index.jsp";
+    }
+
+
+    @ApiOperation(value = "景点列表")
+    @RequiresPermissions("cms:article:read")
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @ResponseBody
+    public Object list(
+            @RequestParam(required = false, defaultValue = "0" , value = "offset") int offset,
+            @RequestParam(required = false, defaultValue = "10" , value = "limit") int limit,
+            @RequestParam(required = false, value = "sort") String sort,
+            @RequestParam(required = false, value = "order") String order)
+    {
+        CmsDayongExample cmsDayongExample = new CmsDayongExample();
+        if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
+            cmsDayongExample.setOrderByClause(sort + " " + order);
+        }
+        List<CmsDayong> rows = cmsDayongService.selectByExampleForOffsetPage(cmsDayongExample, offset, limit);
+        long total = cmsDayongService.countByExample(cmsDayongExample);
+        Map<String, Object> result = new HashMap<>(2);
+        result.put("rows", rows);
+        result.put("total", total);
+        return result;
     }
 
     @ApiOperation(value = "新增景点")
@@ -66,7 +94,10 @@ public class CmsDayongController extends BaseController {
         cmsDayong.setSpotId(time+"");
         System.out.println(cmsDayong.getDayongName());
         System.out.println(cmsDayong.getCreatetime());
-        int count = cmsDayongService.insert(cmsDayong);
+        System.out.println(cmsDayong.getSpotId());
+        System.out.println(cmsDayong.getCreatetime()+"time");
+        System.out.println("1234123");
+        int count = cmsDayongService.insertSelective(cmsDayong);
         return new CmsResult(CmsResultConstant.SUCCESS, count);
     }
 }

@@ -30,9 +30,10 @@ var $table = $('#table');
 $(function() {
 	// bootstrap table初始化
 	$table.bootstrapTable({
-		url: '${basePath}/manage/article/list',
+		url: '${basePath}/manage/spot/list',
 		height: getHeight(),
-		striped: true,
+        sidePagination: 'server',
+/*		striped: true,
 		search: true,
 		showRefresh: true,
 		showColumns: true,
@@ -47,24 +48,17 @@ $(function() {
 		smartDisplay: false,
 		escape: true,
 		searchOnEnterKey: true,
-		idField: 'articleId',
-		sortName: 'orders',
-        sortOrder: 'desc',
-		maintainSelected: true,
+		idField: 'spotId',
+        // sortName: 'dayong_id',
+        // sortOrder: 'desc',
+		maintainSelected: true,*/
 		toolbar: '#toolbar',
 		columns: [
 			{field: 'ck', checkbox: true},
-			{field: 'articleId', title: '编号', sortable: true, align: 'center'},
-			{field: 'systemId', title: '所属系统'},
-			{field: 'topicId', title: '所属专题'},
-			{field: 'title', title: '标题'},
-			{field: 'author', title: '作者'},
-			{field: 'description', title: '描述'},
-			{field: 'type', title: '类型', sortable: true, align: 'center', formatter: 'typeFormatter'},
-			{field: 'status', title: '审核', sortable: true, align: 'center', formatter: 'statusFormatter'},
-			{field: 'readnumber', title: '阅读量'},
-			{field: 'ctime', title: '创建时间', formatter: 'timeFormatter'},
-			{field: 'action', title: '操作', align: 'center', formatter: 'actionFormatter', events: 'actionEvents', clickToSelect: false}
+			{field: 'dayongId', title: 'ID', sortable: true, align: 'center'},
+			{field: 'spotId', title: '景点编号'},
+			{field: 'dayongName', title: '名称'},
+			{field: 'createtime', title: '创建时间' ,formatter: 'timeFormatter'}
 		]
 	});
 });
