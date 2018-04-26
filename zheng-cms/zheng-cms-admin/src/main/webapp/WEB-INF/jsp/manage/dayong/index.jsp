@@ -31,35 +31,33 @@ $(function() {
 	// bootstrap table初始化
 	$table.bootstrapTable({
 		url: '${basePath}/manage/spot/list',
-		height: getHeight(),
+        height: getHeight(),
+        striped: true,
+        search: true,
+        showRefresh: true,
+        showColumns: true,
+        minimumCountColumns: 2,
+        clickToSelect: true,
+        detailView: true,
+        detailFormatter: 'detailFormatter',
+        pagination: true,
+        paginationLoop: false,
         sidePagination: 'server',
-/*		striped: true,
-		search: true,
-		showRefresh: true,
-		showColumns: true,
-		minimumCountColumns: 2,
-		clickToSelect: true,
-		detailView: true,
-		detailFormatter: 'detailFormatter',
-		pagination: true,
-		paginationLoop: false,
-		sidePagination: 'server',
-		silentSort: false,
-		smartDisplay: false,
-		escape: true,
-		searchOnEnterKey: true,
-		idField: 'spotId',
-        // sortName: 'dayong_id',
-        // sortOrder: 'desc',
-		maintainSelected: true,*/
-		toolbar: '#toolbar',
+        silentSort: false,
+        smartDisplay: false,
+        escape: true,
+        searchOnEnterKey: true,
+        idField: 'dayongId',
+        maintainSelected: true,
+        toolbar: '#toolbar',
 		columns: [
 			{field: 'ck', checkbox: true},
-			{field: 'dayongId', title: 'ID', sortable: true, align: 'center'},
+			{field: 'dayongId', title: 'ID',  align: 'center'},
 			{field: 'spotId', title: '景点编号'},
 			{field: 'dayongName', title: '名称'},
-			{field: 'createtime', title: '创建时间' ,formatter: 'timeFormatter'}
-		]
+			{field: 'createtime', title: '创建时间' ,formatter: 'timeFormatter'},
+            {field: 'action', title: '操作', align: 'center', formatter: 'actionFormatter', events: 'actionEvents', clickToSelect: false}
+        ]
 	});
 });
 // 格式化操作按钮
@@ -69,31 +67,12 @@ function actionFormatter(value, row, index) {
         '<a class="delete" href="javascript:;" onclick="deleteAction()" data-toggle="tooltip" title="Remove"><i class="glyphicon glyphicon-remove"></i></a>'
     ].join('');
 }
-// 格式化类型
-function typeFormatter(value, row, index) {
-	if (value == 1) {
-		return '<span class="label label-primary">普通</span>';
-	}
-	if (value == 2) {
-		return '<span class="label label-danger">热门</span>';
-	}
-}
-// 格式化状态
-function statusFormatter(value, row, index) {
-	if (value == -1) {
-		return '<span class="label label-danger">不通过</span>';
-	}
-	if (value == 0) {
-		return '<span class="label label-primary">待审核</span>';
-	}
-	if (value == 1) {
-		return '<span class="label label-success">已通过</span>';
-	}
-}
+
 // 格式化时间
 function timeFormatter(value , row, index) {
 	return new Date(value).toLocaleString();
 }
+
 // 新增
 var createDialog;
 function createAction() {
@@ -130,9 +109,9 @@ function updateAction() {
 	} else {
 		updateDialog = $.dialog({
 			animationSpeed: 300,
-			title: '编辑文章',
+			title: '编辑景点',
 			columnClass: 'xlarge',
-			content: 'url:${basePath}/manage/article/update/' + rows[0].articleId,
+			content: 'url:${basePath}/manage/spot/update/' + rows[0].dayongId,
 			onContentReady: function () {
 				initMaterialInput();
 				$('select').select2();
@@ -162,7 +141,7 @@ function deleteAction() {
 			type: 'red',
 			animationSpeed: 300,
 			title: false,
-			content: '确认删除该文章吗？',
+			content: '确认删除该景点吗？',
 			buttons: {
 				confirm: {
 					text: '确认',
@@ -170,11 +149,11 @@ function deleteAction() {
 					action: function () {
 						var ids = new Array();
 						for (var i in rows) {
-							ids.push(rows[i].articleId);
+							ids.push(rows[i].dayongId);
 						}
 						$.ajax({
 							type: 'get',
-							url: '${basePath}/manage/article/delete/' + ids.join("-"),
+							url: '${basePath}/manage/spot/delete/' + ids.join("-"),
 							success: function(result) {
 								if (result.code != 1) {
 									if (result.data instanceof Array) {

@@ -868,73 +868,73 @@ public class CmsDayongExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andLevelIsNull() {
-            addCriterion("level is null");
+        public Criteria andDayongLevelIsNull() {
+            addCriterion("dayong_level is null");
             return (Criteria) this;
         }
 
-        public Criteria andLevelIsNotNull() {
-            addCriterion("level is not null");
+        public Criteria andDayongLevelIsNotNull() {
+            addCriterion("dayong_level is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLevelEqualTo(String value) {
-            addCriterion("level =", value, "level");
+        public Criteria andDayongLevelEqualTo(String value) {
+            addCriterion("dayong_level =", value, "dayongLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLevelNotEqualTo(String value) {
-            addCriterion("level <>", value, "level");
+        public Criteria andDayongLevelNotEqualTo(String value) {
+            addCriterion("dayong_level <>", value, "dayongLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLevelGreaterThan(String value) {
-            addCriterion("level >", value, "level");
+        public Criteria andDayongLevelGreaterThan(String value) {
+            addCriterion("dayong_level >", value, "dayongLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLevelGreaterThanOrEqualTo(String value) {
-            addCriterion("level >=", value, "level");
+        public Criteria andDayongLevelGreaterThanOrEqualTo(String value) {
+            addCriterion("dayong_level >=", value, "dayongLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLevelLessThan(String value) {
-            addCriterion("level <", value, "level");
+        public Criteria andDayongLevelLessThan(String value) {
+            addCriterion("dayong_level <", value, "dayongLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLevelLessThanOrEqualTo(String value) {
-            addCriterion("level <=", value, "level");
+        public Criteria andDayongLevelLessThanOrEqualTo(String value) {
+            addCriterion("dayong_level <=", value, "dayongLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLevelLike(String value) {
-            addCriterion("level like", value, "level");
+        public Criteria andDayongLevelLike(String value) {
+            addCriterion("dayong_level like", value, "dayongLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLevelNotLike(String value) {
-            addCriterion("level not like", value, "level");
+        public Criteria andDayongLevelNotLike(String value) {
+            addCriterion("dayong_level not like", value, "dayongLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLevelIn(List<String> values) {
-            addCriterion("level in", values, "level");
+        public Criteria andDayongLevelIn(List<String> values) {
+            addCriterion("dayong_level in", values, "dayongLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLevelNotIn(List<String> values) {
-            addCriterion("level not in", values, "level");
+        public Criteria andDayongLevelNotIn(List<String> values) {
+            addCriterion("dayong_level not in", values, "dayongLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLevelBetween(String value1, String value2) {
-            addCriterion("level between", value1, value2, "level");
+        public Criteria andDayongLevelBetween(String value1, String value2) {
+            addCriterion("dayong_level between", value1, value2, "dayongLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLevelNotBetween(String value1, String value2) {
-            addCriterion("level not between", value1, value2, "level");
+        public Criteria andDayongLevelNotBetween(String value1, String value2) {
+            addCriterion("dayong_level not between", value1, value2, "dayongLevel");
             return (Criteria) this;
         }
 

@@ -15,10 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -57,14 +54,18 @@ public class CmsDayongController extends BaseController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public Object list(
-            @RequestParam(required = false, defaultValue = "0" , value = "offset") int offset,
-            @RequestParam(required = false, defaultValue = "10" , value = "limit") int limit,
+            @RequestParam(required = false, defaultValue = "0", value = "offset") int offset,
+            @RequestParam(required = false, defaultValue = "10", value = "limit") int limit,
+            @RequestParam(required = false, defaultValue = "", value = "search") String search,
             @RequestParam(required = false, value = "sort") String sort,
             @RequestParam(required = false, value = "order") String order)
     {
         CmsDayongExample cmsDayongExample = new CmsDayongExample();
         if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
             cmsDayongExample.setOrderByClause(sort + " " + order);
+        }
+        if (StringUtils.isNotBlank(search)) {
+            cmsDayongExample.or().andDayongNameLike("%" + search + "%");
         }
         List<CmsDayong> rows = cmsDayongService.selectByExampleForOffsetPage(cmsDayongExample, offset, limit);
         long total = cmsDayongService.countByExample(cmsDayongExample);
@@ -98,6 +99,34 @@ public class CmsDayongController extends BaseController {
         System.out.println(cmsDayong.getCreatetime()+"time");
         System.out.println("1234123");
         int count = cmsDayongService.insertSelective(cmsDayong);
+        return new CmsResult(CmsResultConstant.SUCCESS, count);
+    }
+
+    @ApiOperation(value = "修改景点")
+    @RequiresPermissions("cms:spot:update")
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+    public String update(@PathVariable("id") int id, ModelMap modelMap) {
+        CmsDayong cmsDayong = cmsDayongService.selectByPrimaryKey(id);
+        modelMap.put("spot", cmsDayong);
+        return "/manage/dayong/update.jsp";
+    }
+
+    @ApiOperation(value = "修改景点")
+    @RequiresPermissions("cms:spot:update")
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public Object update(@PathVariable("id") int id, CmsDayong cmsDayong) {
+        cmsDayong.setDayongId(id);
+        int count = cmsDayongService.updateByPrimaryKeySelective(cmsDayong);
+        return new CmsResult(CmsResultConstant.SUCCESS, count);
+    }
+
+    @ApiOperation(value = "删除景点")
+    @RequiresPermissions("cms:spot:delete")
+    @RequestMapping(value = "/delete/{ids}",method = RequestMethod.GET)
+    @ResponseBody
+    public Object delete(@PathVariable("ids") String ids) {
+        int count = cmsDayongService.deleteByPrimaryKeys(ids);
         return new CmsResult(CmsResultConstant.SUCCESS, count);
     }
 }

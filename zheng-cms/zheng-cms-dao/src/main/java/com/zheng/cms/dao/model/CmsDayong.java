@@ -41,7 +41,7 @@ public class CmsDayong implements Serializable {
      *
      * @mbg.generated
      */
-    private String level;
+    private String dayongLevel;
 
     private Date createtime;
 
@@ -49,7 +49,7 @@ public class CmsDayong implements Serializable {
 
     private String keyword;
 
-    private String desc;
+    private String dayongDesc;
 
     private static final long serialVersionUID = 1L;
 
@@ -141,12 +141,12 @@ public class CmsDayong implements Serializable {
         this.catelog = catelog;
     }
 
-    public String getLevel() {
-        return level;
+    public String getDayongLevel() {
+        return dayongLevel;
     }
 
-    public void setLevel(String level) {
-        this.level = level;
+    public void setDayongLevel(String dayongLevel) {
+        this.dayongLevel = dayongLevel;
     }
 
     public Date getCreatetime() {
@@ -173,12 +173,12 @@ public class CmsDayong implements Serializable {
         this.keyword = keyword;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDayongDesc() {
+        return dayongDesc;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDayongDesc(String dayongDesc) {
+        this.dayongDesc = dayongDesc;
     }
 
     @Override
@@ -198,11 +198,11 @@ public class CmsDayong implements Serializable {
         sb.append(", route=").append(route);
         sb.append(", summary=").append(summary);
         sb.append(", catelog=").append(catelog);
-        sb.append(", level=").append(level);
+        sb.append(", dayongLevel=").append(dayongLevel);
         sb.append(", createtime=").append(createtime);
         sb.append(", updatetime=").append(updatetime);
         sb.append(", keyword=").append(keyword);
-        sb.append(", desc=").append(desc);
+        sb.append(", dayongDesc=").append(dayongDesc);
         sb.append("]");
         return sb.toString();
     }
@@ -230,11 +230,11 @@ public class CmsDayong implements Serializable {
             && (this.getRoute() == null ? other.getRoute() == null : this.getRoute().equals(other.getRoute()))
             && (this.getSummary() == null ? other.getSummary() == null : this.getSummary().equals(other.getSummary()))
             && (this.getCatelog() == null ? other.getCatelog() == null : this.getCatelog().equals(other.getCatelog()))
-            && (this.getLevel() == null ? other.getLevel() == null : this.getLevel().equals(other.getLevel()))
+            && (this.getDayongLevel() == null ? other.getDayongLevel() == null : this.getDayongLevel().equals(other.getDayongLevel()))
             && (this.getCreatetime() == null ? other.getCreatetime() == null : this.getCreatetime().equals(other.getCreatetime()))
             && (this.getUpdatetime() == null ? other.getUpdatetime() == null : this.getUpdatetime().equals(other.getUpdatetime()))
             && (this.getKeyword() == null ? other.getKeyword() == null : this.getKeyword().equals(other.getKeyword()))
-            && (this.getDesc() == null ? other.getDesc() == null : this.getDesc().equals(other.getDesc()));
+            && (this.getDayongDesc() == null ? other.getDayongDesc() == null : this.getDayongDesc().equals(other.getDayongDesc()));
     }
 
     @Override
@@ -252,11 +252,11 @@ public class CmsDayong implements Serializable {
         result = prime * result + ((getRoute() == null) ? 0 : getRoute().hashCode());
         result = prime * result + ((getSummary() == null) ? 0 : getSummary().hashCode());
         result = prime * result + ((getCatelog() == null) ? 0 : getCatelog().hashCode());
-        result = prime * result + ((getLevel() == null) ? 0 : getLevel().hashCode());
+        result = prime * result + ((getDayongLevel() == null) ? 0 : getDayongLevel().hashCode());
         result = prime * result + ((getCreatetime() == null) ? 0 : getCreatetime().hashCode());
         result = prime * result + ((getUpdatetime() == null) ? 0 : getUpdatetime().hashCode());
         result = prime * result + ((getKeyword() == null) ? 0 : getKeyword().hashCode());
-        result = prime * result + ((getDesc() == null) ? 0 : getDesc().hashCode());
+        result = prime * result + ((getDayongDesc() == null) ? 0 : getDayongDesc().hashCode());
         return result;
     }
 }

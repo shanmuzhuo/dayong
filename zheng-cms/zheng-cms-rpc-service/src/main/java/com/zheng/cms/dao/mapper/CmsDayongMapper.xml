@@ -13,13 +13,13 @@
     <result column="route" jdbcType="VARCHAR" property="route" />
     <result column="summary" jdbcType="VARCHAR" property="summary" />
     <result column="catelog" jdbcType="VARCHAR" property="catelog" />
-    <result column="level" jdbcType="VARCHAR" property="level" />
+    <result column="dayong_level" jdbcType="VARCHAR" property="dayongLevel" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
     <result column="keyword" jdbcType="VARCHAR" property="keyword" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zheng.cms.dao.model.CmsDayong">
-    <result column="desc" jdbcType="LONGVARCHAR" property="desc" />
+    <result column="dayong_desc" jdbcType="LONGVARCHAR" property="dayongDesc" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -81,10 +81,10 @@
   </sql>
   <sql id="Base_Column_List">
     dayong_id, spot_id, dayong_name, dayong_enname, longitude, latitude, address, price, 
-    route, summary, catelog, level, createTime, updateTime, keyword
+    route, summary, catelog, dayong_level, createTime, updateTime, keyword
   </sql>
   <sql id="Blob_Column_List">
-    desc
+    dayong_desc
   </sql>
   <select id="selectByExampleWithBLOBs" parameterType="com.zheng.cms.dao.model.CmsDayongExample" resultMap="ResultMapWithBLOBs">
     select
@@ -138,15 +138,15 @@
     insert into cms_dayong (dayong_id, spot_id, dayong_name, 
       dayong_enname, longitude, latitude, 
       address, price, route, 
-      summary, catelog, level, 
+      summary, catelog, dayong_level, 
       createTime, updateTime, keyword, 
-      desc)
+      dayong_desc)
     values (#{dayongId,jdbcType=INTEGER}, #{spotId,jdbcType=VARCHAR}, #{dayongName,jdbcType=VARCHAR}, 
       #{dayongEnname,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, 
       #{address,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{route,jdbcType=VARCHAR}, 
-      #{summary,jdbcType=VARCHAR}, #{catelog,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, 
+      #{summary,jdbcType=VARCHAR}, #{catelog,jdbcType=VARCHAR}, #{dayongLevel,jdbcType=VARCHAR}, 
       #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{keyword,jdbcType=VARCHAR}, 
-      #{desc,jdbcType=LONGVARCHAR})
+      #{dayongDesc,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zheng.cms.dao.model.CmsDayong">
     insert into cms_dayong
@@ -184,8 +184,8 @@
       <if test="catelog != null">
         catelog,
       </if>
-      <if test="level != null">
-        level,
+      <if test="dayongLevel != null">
+        dayong_level,
       </if>
       <if test="createtime != null">
         createTime,
@@ -196,8 +196,8 @@
       <if test="keyword != null">
         keyword,
       </if>
-      <if test="desc != null">
-        desc,
+      <if test="dayongDesc != null">
+        dayong_desc,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -234,8 +234,8 @@
       <if test="catelog != null">
         #{catelog,jdbcType=VARCHAR},
       </if>
-      <if test="level != null">
-        #{level,jdbcType=VARCHAR},
+      <if test="dayongLevel != null">
+        #{dayongLevel,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null">
         #{createtime,jdbcType=TIMESTAMP},
@@ -246,8 +246,8 @@
       <if test="keyword != null">
         #{keyword,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null">
-        #{desc,jdbcType=LONGVARCHAR},
+      <if test="dayongDesc != null">
+        #{dayongDesc,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -293,8 +293,8 @@
       <if test="record.catelog != null">
         catelog = #{record.catelog,jdbcType=VARCHAR},
       </if>
-      <if test="record.level != null">
-        level = #{record.level,jdbcType=VARCHAR},
+      <if test="record.dayongLevel != null">
+        dayong_level = #{record.dayongLevel,jdbcType=VARCHAR},
       </if>
       <if test="record.createtime != null">
         createTime = #{record.createtime,jdbcType=TIMESTAMP},
@@ -305,8 +305,8 @@
       <if test="record.keyword != null">
         keyword = #{record.keyword,jdbcType=VARCHAR},
       </if>
-      <if test="record.desc != null">
-        desc = #{record.desc,jdbcType=LONGVARCHAR},
+      <if test="record.dayongDesc != null">
+        dayong_desc = #{record.dayongDesc,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -326,11 +326,11 @@
       route = #{record.route,jdbcType=VARCHAR},
       summary = #{record.summary,jdbcType=VARCHAR},
       catelog = #{record.catelog,jdbcType=VARCHAR},
-      level = #{record.level,jdbcType=VARCHAR},
+      dayong_level = #{record.dayongLevel,jdbcType=VARCHAR},
       createTime = #{record.createtime,jdbcType=TIMESTAMP},
       updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
       keyword = #{record.keyword,jdbcType=VARCHAR},
-      desc = #{record.desc,jdbcType=LONGVARCHAR}
+      dayong_desc = #{record.dayongDesc,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -348,7 +348,7 @@
       route = #{record.route,jdbcType=VARCHAR},
       summary = #{record.summary,jdbcType=VARCHAR},
       catelog = #{record.catelog,jdbcType=VARCHAR},
-      level = #{record.level,jdbcType=VARCHAR},
+      dayong_level = #{record.dayongLevel,jdbcType=VARCHAR},
       createTime = #{record.createtime,jdbcType=TIMESTAMP},
       updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
       keyword = #{record.keyword,jdbcType=VARCHAR}
@@ -389,8 +389,8 @@
       <if test="catelog != null">
         catelog = #{catelog,jdbcType=VARCHAR},
       </if>
-      <if test="level != null">
-        level = #{level,jdbcType=VARCHAR},
+      <if test="dayongLevel != null">
+        dayong_level = #{dayongLevel,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null">
         createTime = #{createtime,jdbcType=TIMESTAMP},
@@ -401,8 +401,8 @@
       <if test="keyword != null">
         keyword = #{keyword,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null">
-        desc = #{desc,jdbcType=LONGVARCHAR},
+      <if test="dayongDesc != null">
+        dayong_desc = #{dayongDesc,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where dayong_id = #{dayongId,jdbcType=INTEGER}
@@ -419,11 +419,11 @@
       route = #{route,jdbcType=VARCHAR},
       summary = #{summary,jdbcType=VARCHAR},
       catelog = #{catelog,jdbcType=VARCHAR},
-      level = #{level,jdbcType=VARCHAR},
+      dayong_level = #{dayongLevel,jdbcType=VARCHAR},
       createTime = #{createtime,jdbcType=TIMESTAMP},
       updateTime = #{updatetime,jdbcType=TIMESTAMP},
       keyword = #{keyword,jdbcType=VARCHAR},
-      desc = #{desc,jdbcType=LONGVARCHAR}
+      dayong_desc = #{dayongDesc,jdbcType=LONGVARCHAR}
     where dayong_id = #{dayongId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zheng.cms.dao.model.CmsDayong">
@@ -438,7 +438,7 @@
       route = #{route,jdbcType=VARCHAR},
       summary = #{summary,jdbcType=VARCHAR},
       catelog = #{catelog,jdbcType=VARCHAR},
-      level = #{level,jdbcType=VARCHAR},
+      dayong_level = #{dayongLevel,jdbcType=VARCHAR},
       createTime = #{createtime,jdbcType=TIMESTAMP},
       updateTime = #{updatetime,jdbcType=TIMESTAMP},
       keyword = #{keyword,jdbcType=VARCHAR}
