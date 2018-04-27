@@ -7,6 +7,54 @@
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
 
+<head>
+    <style type="text/css">
+        /* table 样式 */
+        table {
+            border-top: 1px solid #ccc;
+            border-left: 1px solid #ccc;
+        }
+        table td,
+        table th {
+            border-bottom: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            padding: 3px 5px;
+        }
+        table th {
+            border-bottom: 2px solid #ccc;
+            text-align: center;
+        }
+
+        /* blockquote 样式 */
+        blockquote {
+            display: block;
+            border-left: 8px solid #d0e5f2;
+            padding: 5px 10px;
+            margin: 10px 0;
+            line-height: 1.4;
+            font-size: 100%;
+            background-color: #f1f1f1;
+        }
+
+        /* code 样式 */
+        code {
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            background-color: #f1f1f1;
+            border-radius: 3px;
+            padding: 3px 5px;
+            margin: 0 3px;
+        }
+        pre code {
+            display: block;
+        }
+        /* ul ol 样式 */
+        ul, ol {
+            margin: 10px 0 10px 20px;
+        }
+    </style>
+</head>
 <div id="updateDialog" class="crudDialog">
     <form method="post" id="updateForm">
         <input type="hidden" name="userId" value="1">
@@ -75,6 +123,21 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <div class="fg-line">
+                        <label for="dayongDesc">详情描述</label>
+                        <textarea id="dayongDesc" name="dayongDesc" class="form-control" style="visibility: hidden" rows="1"></textarea>
+                        <%--<input type="text" id="dayongDesc" class="form-control" name="dayongDesc">--%>
+                        <div id="div1" >
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="form-group text-right dialog-buttons">
             <a class="waves-effect waves-button" href="javascript:;" onclick="updateSubmit();">保存</a>
             <a class="waves-effect waves-button" href="javascript:;" onclick="updateDialog.close();">取消</a>
@@ -82,6 +145,19 @@
     </form>
 </div>
 <script>
+    var E = window.wangEditor
+    var editor = new E('#div1')
+    var $text1 = $('#dayongDesc')
+    var $txt1 = '${spot.dayongDesc}'
+    $('#div1').html($txt1)
+    editor.customConfig.onchange = function (html) {
+        // 监控变化，同步更新到 textarea
+        $text1.val(html)
+    }
+    editor.create()
+    // 初始化 textarea 的值
+    $('#dayongDesc').val($txt1)
+
     function updateSubmit() {
         $.ajax({
             type: 'post',

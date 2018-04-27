@@ -75,14 +75,43 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <div class="fg-line">
+                        <label for="dayongDesc">详情描述</label>
+                        <textarea id="dayongDesc" name="dayongDesc" class="form-control" style="visibility: hidden" rows="1"></textarea>
+                        <%--<input type="text" id="dayongDesc" class="form-control" name="dayongDesc">--%>
+                        <div id="div1" >
+                            <p>请输入内容</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="form-group text-right dialog-buttons">
             <a class="waves-effect waves-button" href="javascript:;" onclick="createSubmit();">保存</a>
             <a class="waves-effect waves-button" href="javascript:;" onclick="createDialog.close();">取消</a>
+            <a class="waves-effect waves-button" href="javascript:;" onclick="showval();">取消</a>
         </div>
     </form>
 </div>
 
 <script>
+    var E = window.wangEditor
+    var editor = new E('#div1')
+    var $text1 = $('#dayongDesc')
+    editor.customConfig.onchange = function (html) {
+        // 监控变化，同步更新到 textarea
+        $text1.val(html)
+    }
+    editor.create()
+    // 初始化 textarea 的值
+    // $text1.val(editor.txt.html())
+    function showval() {
+        alert($('#dayongDesc').val());
+    }
 function createSubmit() {
     $.ajax({
         type: 'post',

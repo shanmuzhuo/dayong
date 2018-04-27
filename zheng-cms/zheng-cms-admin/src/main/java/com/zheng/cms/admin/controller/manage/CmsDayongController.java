@@ -93,11 +93,6 @@ public class CmsDayongController extends BaseController {
         System.out.println(time+"---------");
         cmsDayong.setCreatetime(date);
         cmsDayong.setSpotId(time+"");
-        System.out.println(cmsDayong.getDayongName());
-        System.out.println(cmsDayong.getCreatetime());
-        System.out.println(cmsDayong.getSpotId());
-        System.out.println(cmsDayong.getCreatetime()+"time");
-        System.out.println("1234123");
         int count = cmsDayongService.insertSelective(cmsDayong);
         return new CmsResult(CmsResultConstant.SUCCESS, count);
     }
