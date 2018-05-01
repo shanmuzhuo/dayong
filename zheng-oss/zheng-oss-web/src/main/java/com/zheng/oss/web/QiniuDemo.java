@@ -12,14 +12,14 @@ import java.io.IOException;
  */
 public class QiniuDemo {
 	//设置好账号的ACCESS_KEY和SECRET_KEY
-	String accessKey = "";
-	String secretKey = "";
+	String accessKey = "1gtVJtFNb8mUPItW393Rqaxg41WveP0WWPP4kAUu";
+	String secretKey = "JVLmiIlDhs1w9YPmrSQOHd71XbijtK_e7FYXgS9P";
 	//要上传的空间
-	String bucketname = "zheng";
+	String bucketname = "images";
 	//上传到七牛后保存的文件名
-	String key = "my-java.png";
+	String key = "my-java222222222.png";
 	//上传文件的路径
-	String filePath = "C:\\Users\\admin\\Pictures\\zsz\\20161108161228.png";
+	String filePath = "G:\\Users\\hasee\\Pictures\\小图片\\1.jpg";
 
 	//密钥配置
 	Auth auth = Auth.create(accessKey, secretKey);

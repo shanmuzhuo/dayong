@@ -7,6 +7,7 @@
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
 <link href="${basePath}/resources/zheng-admin/plugins/bootstrap-3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="${basePath}/resources/zheng-admin/plugins/bootstrap-fileinput/css/fileinput.css" rel="stylesheet">
 <link href="${basePath}/resources/zheng-admin/plugins/material-design-iconic-font-2.2.0/css/material-design-iconic-font.min.css" rel="stylesheet"/>
 <link href="${basePath}/resources/zheng-admin/plugins/bootstrap-table-1.11.0/bootstrap-table.min.css" rel="stylesheet"/>
 <link href="${basePath}/resources/zheng-admin/plugins/waves-0.7.5/waves.min.css" rel="stylesheet"/>
@@ -17,3 +18,4 @@
 <link href="${basePath}/resources/zheng-admin/plugins/select2/theme/select2-bootstrap.min.css" rel="stylesheet"/>
 <link href="${basePath}/resources/zheng-admin/plugins/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet"/>
 <link href="${basePath}/resources/zheng-admin/css/common.css" rel="stylesheet"/>
+<%--<link href="${basePath}/resources/zheng-admin/plugins/layui/css/layui.css" rel="stylesheet" />--%>

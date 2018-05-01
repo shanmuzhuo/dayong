@@ -89,7 +89,6 @@ public class CmsDayongController extends BaseController {
     public  Object add(CmsDayong cmsDayong){
         long time = System.currentTimeMillis();
         Date date = new Date(time);
-
         System.out.println(time+"---------");
         cmsDayong.setCreatetime(date);
         cmsDayong.setSpotId(time+"");

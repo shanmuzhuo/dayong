@@ -154,6 +154,9 @@
         // 监控变化，同步更新到 textarea
         $text1.val(html)
     }
+    editor.customConfig.uploadImgServer = '/manage/file/imgupload'  // 上传图片到服务器
+    editor.customConfig.uploadFileName = 'imagefile'
+    editor.customConfig.uploadImgTimeout = 180000 // 3分钟
     editor.create()
     // 初始化 textarea 的值
     $('#dayongDesc').val($txt1)

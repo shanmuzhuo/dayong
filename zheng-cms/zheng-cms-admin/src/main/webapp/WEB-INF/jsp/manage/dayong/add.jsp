@@ -6,9 +6,14 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
+<link href="${basePath}/resources/zheng-admin/plugins/bootstrap-fileinput/css/fileinput.css" rel="stylesheet">
+<!-- 文件上传 -->
+<script src="${basePath}/resources/zheng-admin/plugins/bootstrap-fileinput/js/fileinput.js"></script>
+<script src="${basePath}/resources/zheng-admin/plugins/bootstrap-fileinput/js/fileinput.min.js"></script>
+<script src="${basePath}/resources/zheng-admin/plugins/bootstrap-fileinput/js/locales/zh.js"></script>
 
 <div id="addDialog" class="addDialog">
-    <form method="post" id="addspotForm">
+    <form method="post" id="addspotForm" >
         <input type="hidden" name="userId" value="1">
         <div class="row">
             <div class="col-sm-5">
@@ -47,7 +52,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-4">
                 <div class="form-group">
                     <div class="fg-line">
                         <label for="catelog">分类</label>
@@ -55,15 +60,25 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-5 col-sm-offset-1">
+            <div class="col-sm-4">
                 <div class="form-group">
                     <div class="fg-line">
-                        <label for="keyword">关键字（用英文，隔开）</label>
+                        <label for="keyword">关键字（用英文.隔开）</label>
                         <input type="text" id="keyword" class="form-control" name="keyword" maxlength="200">
                     </div>
                 </div>
             </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="fg-line">
+                        <label for="sortnum">排序号码(数越大越靠前，1-100)</label>
+                        <input type="text" id="sortnum" class="form-control" name="sortnum" maxlength="200" >
+                    </div>
+                </div>
+            </div>
         </div>
+
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
@@ -73,6 +88,42 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <label>置顶</label>
+                <div class="radio">
+                    <div class="radio radio-inline radio-info">
+                        <input id="istop_1" type="radio" name="istop" value="1" >
+                        <label for="istop_1">置顶 </label>
+                    </div>
+                    <div class="radio radio-inline radio-danger">
+                        <input id="istop_0" type="radio" name="istop" value="0" checked>
+                        <label for="istop_0">不置顶 </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <label>锁定</label>
+                <div class="radio">
+                    <div class="radio radio-inline radio-info">
+                        <input id="islock_1" type="radio" name="islock" value="1" >
+                        <label for="islock_1">锁定 </label>
+                    </div>
+                    <div class="radio radio-inline radio-danger">
+                        <input id="islock_0" type="radio" name="islock" value="0" checked>
+                        <label for="islock_0">不锁定 </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div >
+            <label for="input-id">首页展示图片</label>
+
+            <input id ="input-id" name="imagefile" type = "file" onchange="dosth()" multiple >
         </div>
 
         <div class="row">
@@ -99,6 +150,7 @@
 </div>
 
 <script>
+    // 初始化wangeditors
     var E = window.wangEditor
     var editor = new E('#div1')
     var $text1 = $('#dayongDesc')
@@ -106,12 +158,30 @@
         // 监控变化，同步更新到 textarea
         $text1.val(html)
     }
+    editor.customConfig.uploadImgServer = '/manage/file/imgupload'  // 上传图片到服务器
+    editor.customConfig.uploadFileName = 'imagefile'
+    editor.customConfig.uploadImgTimeout = 180000 // 3分钟
     editor.create()
-    // 初始化 textarea 的值
-    // $text1.val(editor.txt.html())
-    function showval() {
-        alert($('#dayongDesc').val());
+
+    initFileInput();
+function initFileInput() {
+    var projectfileoptions = {
+        language : 'zh',
+        uploadUrl:'/manage/file/upload',
     }
+    $("#input-id").fileinput(projectfileoptions);
+}
+
+$("#input-id").on("fileuploaded", function(event, data){
+    console.log(data)
+    var dataObj = eval(data)
+    // var dataObj = JSON.parse(data);
+    console.log(data.response.errno)
+});
+
+function dosth(){
+    console.log( $("#input-id").val());
+}
 function createSubmit() {
     $.ajax({
         type: 'post',
