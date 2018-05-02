@@ -167,7 +167,14 @@
 function initFileInput() {
     var projectfileoptions = {
         language : 'zh',
-        uploadUrl:'/manage/file/upload',
+        layoutTemplates:{
+            actionDelete: "",
+            actionUpload: "",
+        },
+        MAXFILECOUNT: 3,
+        autoReplace: true,
+        msgFilesTooMany:"";
+        uploadUrl:'/manage/file/upload2Aliyun',
     }
     $("#input-id").fileinput(projectfileoptions);
 }

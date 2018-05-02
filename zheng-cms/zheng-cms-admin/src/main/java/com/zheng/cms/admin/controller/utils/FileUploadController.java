@@ -2,6 +2,7 @@ package com.zheng.cms.admin.controller.utils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.aliyun.oss.OSSClient;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.qiniu.common.QiniuException;
@@ -121,6 +122,46 @@ public class FileUploadController extends BaseController {
                 e.printStackTrace();
             }
         }
+        jsonObject.put("errno", "0");
+        return  jsonObject;
+    }
+
+
+    @ApiOperation(value = "上传文件到阿里云")
+    @RequestMapping(value = "/upload2Aliyun")
+    @ResponseBody
+    public Object upload2Aliyun( @RequestParam(required = false, value = "imagefile") List<MultipartFile> imagefiles){
+        JSONObject jsonObject = new JSONObject();
+        // endpoint以杭州为例，其它region请按实际情况填写
+        String endpoint = "http://oss-cn-shenzhen.aliyuncs.com";
+        // 云账号AccessKey有所有API访问权限，建议遵循阿里云安全最佳实践，创建并使用RAM子账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建
+        String accessKeyId = "LTAIFyYu4S7cTTxH";
+        String accessKeySecret = "c0tPze2VplmmMOLTJaPPTgvHKJDDFa";
+        // 创建OSSClient实例
+        OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
+        // 上传文件流
+
+        for (int i = 0; i < imagefiles.size(); i++) {
+            String filename = imagefiles.get(i).getOriginalFilename(); // 获取文件名
+            String prefix = filename.substring(filename.lastIndexOf(".") + 1); // 获取后缀名
+            //默认不指定key的情况下，以文件内容的hash值作为文件名
+            String key = null;
+            try {
+                key = imagefiles.get(i).getInputStream().hashCode() + "." + prefix;
+                System.out.println( key );
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                ossClient.putObject("shanmuzhuo","images/"+key, imagefiles.get(i).getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        System.out.println("重新编译。。。。1234");
+        // 关闭client
+        ossClient.shutdown();
         jsonObject.put("errno", "0");
         return  jsonObject;
     }
